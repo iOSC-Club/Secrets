@@ -16,4 +16,12 @@ struct ActiveSecretGeneration {
     var progressText: String {
         "\(revealedText.count) of \(totalCharacterCount) characters generated"
     }
+
+    var percentageComplete: Int {
+        Int((progress * 100).rounded(.down))
+    }
+
+    var statusMessage: String {
+        percentageComplete >= 100 ? "Completed" : "Generating..."
+    }
 }
