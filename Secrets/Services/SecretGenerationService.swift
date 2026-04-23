@@ -4,7 +4,7 @@ import Foundation
 final class SecretGenerationService {
     private let minimumGenerationDuration: TimeInterval
 
-    init(minimumGenerationDuration: TimeInterval = 30) {
+    init(minimumGenerationDuration: TimeInterval = 15) {
         self.minimumGenerationDuration = minimumGenerationDuration
     }
 
