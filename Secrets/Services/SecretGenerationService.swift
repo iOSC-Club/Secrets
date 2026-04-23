@@ -10,12 +10,12 @@ final class SecretGenerationService {
 
     func generate(
         from seed: SecretSeed,
-        onProgress: @escaping (ActiveSecretGeneration) -> Void
+        onProgress: @escaping @MainActor (ActiveSecretGeneration) async -> Void
     ) async -> Secret {
         let characters = Array(seed.body)
         var revealedText = ""
 
-        onProgress(
+        await onProgress(
             ActiveSecretGeneration(
                 title: seed.title,
                 revealedText: revealedText,
@@ -29,7 +29,7 @@ final class SecretGenerationService {
             try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
             revealedText.append(character)
 
-            onProgress(
+            await onProgress(
                 ActiveSecretGeneration(
                     title: seed.title,
                     revealedText: revealedText,
