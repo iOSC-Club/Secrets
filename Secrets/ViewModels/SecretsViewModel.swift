@@ -45,8 +45,9 @@ final class SecretsViewModel: ObservableObject {
                     return
                 }
             }
-
-            #warning("Add Animation")
+            
+            #warning("Add animation")
+            self.activeGeneration = nil
         }
     }
 
