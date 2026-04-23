@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import SwiftUI
 
 @MainActor
 final class SecretsViewModel: ObservableObject {
@@ -34,13 +35,18 @@ final class SecretsViewModel: ObservableObject {
             return
         }
 
-        Task {
-            let secret = await generationService.generate(from: nextSeed) { [weak self] progress in
-                self?.activeGeneration = progress
+        Task { [weak self] in
+            guard let self else {
+                return
             }
 
-            activeGeneration = nil
-            secrets.insert(secret, at: 0)
+            let secret = await self.generationService.generate(from: nextSeed) { [weak self] progress in
+                guard let self else {
+                    return
+                }
+            }
+
+            #warning("Add Animation")
         }
     }
 
